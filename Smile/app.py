@@ -10,6 +10,8 @@ def render_homepage():
 
 @app.route('/menu')
 def render_menu_page():
+    producet_list = [["Flat white", "Minimal foam on a coffee", "250ml", 4.00],
+                     ["Espresso", "A duble shot of coffee", "80ml", 3.00, "espresso"]]
     return render_template('menu.html')
 
 
