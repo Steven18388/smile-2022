@@ -1,18 +1,15 @@
 from flask import Flask, render_template
+import sqlite3
+from sqlite3 import Error
 
 app = Flask(__name__)
-DATABASE = "smile.db"
+DATABASE = "C:/Users/18388/OneDrive - Wellington College/13DTS/Smile/smile.db"
 
 def create_connection(db_file):
-    ###
-    Create a connection with the database
-    parameter:name of the database file
-    returns: a connection to the file
-    ###
     try:
         connection = sqlite3.connect(db_file)
         return connection
-    excpet Error as e:
+    except Error as e:
         print(e)
     return None
 
@@ -30,9 +27,9 @@ def render_menu_page():
     cur.execute(query)
     product_list = cur.fetchall()
 
-    producet_list = [["Flat white", "Minimal foam on a coffee", "250ml", 4.00],
-                     ["Espresso", "A duble shot of coffee", "80ml", 3.00, "espresso"]]
-    return render_template('menu.html')
+    #product_list = [["Flat white", "Minimal foam on a coffee", "250ml", 4.00],
+         #            ["Espresso", "A double shot of coffee", "80ml", 3.00, "espresso"]]
+    return render_template('menu.html', products=product_list)
 
 
 @app.route('/contact')
